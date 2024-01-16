@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 const Home = () => {
+  const {currentUser} = useSelector(state=>state.user)
   return (
     <div className='w-full h-[80vh]'>
       <div className='w-full max-w-[60%] m-auto flex flex-col gap-10 items-center justify-center py-20'>
@@ -14,7 +16,9 @@ const Home = () => {
           <div className='flex-1 bg-slate-50 rounded-lg p-5 space-y-3'>
             <h2 className='text-xl sm:text-3xl font-[500]'>Switch to Pro to unlock all the questions.</h2>
             <p className='text-lg text-[#9b9a9a]'>Special Offer is waiting for you!!</p>
-            <button className='btn bg-green-400'>Go for Pro</button>
+            {
+              currentUser?.subscribed==='no' && <button className='btn bg-green-400'>Go for Pro</button>
+            }
             <p className='text-lg text-[#9b9a9a]'>Unlock all Practise all.</p>
           </div>
         </div>
