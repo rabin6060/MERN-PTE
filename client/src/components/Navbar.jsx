@@ -29,7 +29,6 @@ const Navbar = () => {
         }
         
     }
-   console.log(currentUser);
   return (
     <div className={`w-full h-5vh bg-slate-50 ${signin ? '':'border-b-2'}  border-[#d8d8d8]`}>
         <div className='w-full sm:max-w-[60%] m-auto h-full flex justify-between items-center py-2'>
@@ -47,7 +46,7 @@ const Navbar = () => {
                     currentUser ? 
                     
                      <div className='text-center cursor-pointer relative flex items-center gap-5 ' >
-                       <Link to={currentUser.role == 'admin'? '/add':''} className={`whitespace-nowrap btn bg-green-400 ${(currentUser.role==='user'&&currentUser.subscribed==='yes')?'hidden':'block'} `}>
+                       <Link to={currentUser.role == 'admin'? '/add':'/payment'} className={`whitespace-nowrap btn bg-green-400 ${(currentUser.role==='user'&&currentUser.subscribed==='yes')?'hidden':'block'} `}>
                         {
                             currentUser.role==='admin'
                             ? 'Add Questions'
@@ -63,7 +62,7 @@ const Navbar = () => {
                         ? (
                         <div className='w-[200px] flex flex-col rounded-md cursor-pointer bg-green-400 absolute top-16 right-0 text-right text-white text-xl overflow-hidden ' onClick={()=>setShow(false)}>
                             <Link to={`/profile/${currentUser?._id}`} className='hoverDisplay'>Account</Link>
-                            <Link to={currentUser.role == 'admin'? '/add':''} className={`hoverDisplay ${(currentUser.role==='user'&&currentUser.subscribed==='yes')?'hidden':'block'} `}>
+                            <Link to={currentUser.role == 'admin'? '/add':'/payment'} className={`hoverDisplay ${(currentUser.role==='user'&&currentUser.subscribed==='yes')?'hidden':'block'} `}>
                                 {
                                     currentUser.role==='admin'
                                     ? 'Add Questions'
