@@ -13,11 +13,12 @@ const Home = () => {
             <p className='text-xl text-[#afaeae]'>We provide a variety of questions to practise with.You can practise your listening,reading,writing and speaking to score the best. For now, we have listening part only. Other aspects of learning is in process of building.There are some free questions for you to begin with.</p>
             <Link to={'/practise'} className='btn'>Start Practising</Link>
           </div>
-          <div className='flex-1 bg-slate-50 rounded-lg p-5 space-y-3'>
+          <div className='flex-1 bg-slate-50 rounded-lg p-5 space-y-4'>
             <h2 className='text-xl sm:text-3xl font-[500]'>Switch to Pro to unlock all the questions.</h2>
             <p className='text-lg text-[#9b9a9a]'>Special Offer is waiting for you!!</p>
             {
-              currentUser?.subscribed==='no' && <button className='btn bg-green-400'>Go for Pro</button>
+              currentUser?.subscribed==='no' && <Link to={'/payment'} >
+                <button className='btn bg-green-400 mt-2'>Go for Pro</button></Link>
             }
             <p className='text-lg text-[#9b9a9a]'>Unlock all Practise all.</p>
           </div>
