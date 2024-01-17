@@ -16,7 +16,10 @@ import axios from 'axios'
 import { questionFetchError, questionFetchStart, questionFetchSuccess } from './redux/question/questionSlice'
 import Payment from "./pages/Payment";
 
+
+
 const App = () => {
+ 
   const dispatch = useDispatch()
   useEffect(()=>{
         dispatch(questionFetchStart())
@@ -43,7 +46,9 @@ const App = () => {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/add" element={<AddQuestion />} />
           <Route element={<Protected />}>
-            <Route path="/payment" element={<Payment/>} />
+            
+              <Route path="/payment" element={<Payment/>} />
+
             <Route path="/practise" element={<PractiseQuestions />} />
             <Route element={<ProtectedQuestion/>}>
               <Route path="/question/:id" element={<QuestionDetail />} />
