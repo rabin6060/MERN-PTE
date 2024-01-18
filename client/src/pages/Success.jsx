@@ -8,7 +8,6 @@ const Success = () => {
   const dispatch = useDispatch()
   const {currentUser} = useSelector(state=>state.user)
   const sessionId = currentUser.sessionId
-  console.log(sessionId);
   const navigate = useNavigate()
   const handleClick =async ()=>{
     dispatch(updateStart())
@@ -16,9 +15,9 @@ const Success = () => {
       const res = await axios.post('http://localhost:8000/api/user/updateSubsStatus',{sessionId})
       console.log(res)
       if (!res) {
-        updateFailure(res.data)
+        dispatch(updateFailure(res.data))
       }
-      updateSuccess(res.data)
+      dispatch(updateSuccess(res.data))
       navigate('/')
     } catch (error) {
       console.log(error.message);
