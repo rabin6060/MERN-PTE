@@ -7,7 +7,6 @@ import { signOutFailure, signOutStart, signOutSuccess } from '../redux/user/user
 const Navbar = () => {
     const [signin,setSignin] = useState(false)
     const {currentUser} = useSelector((state)=>state.user)
-    console.log(currentUser);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [show,setShow]=useState(false)
