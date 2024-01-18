@@ -16,8 +16,9 @@ import axios from 'axios'
 import { questionFetchError, questionFetchStart, questionFetchSuccess } from './redux/question/questionSlice'
 //import Payment from "./pages/Payment";
 import Success from "./pages/Success";
-import { Cancel } from "./pages/Cancel";
+
 import Payment from "./pages/Payment";
+import Cancel from "./pages/Cancel";
 
 
 
