@@ -49,19 +49,6 @@ const userSlice = createSlice({
             state.currentUser = null,
             state.error = action.payload
         },
-        updateSessionStart:(state)=>{
-            state.loading = true
-        },
-        updateSessionSuccess:(state,action)=>{
-            state.loading = false,
-            state.currentUser = action.payload,
-            state.error = null
-        },
-        updateSessionFailure:(state,action)=>{
-            state.loading = false,
-            state.currentUser = null,
-            state.error = action.payload
-        },
         deleteStart:(state)=>{
             state.loading = true
         },
