@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
     subscribed:{
         type:String,
         default:'no'
+    },
+    sessionId:{
+        type:String,
+        default:null
     }
 },{timestamps:true})
 

@@ -3,6 +3,9 @@ import { errorHandler } from "../utils/customError.js"
 import fs from 'fs'
 import axios from 'axios'
 import openai from "../openai.js"
+import stripePackage from 'stripe'
+
+const stripe = new stripePackage(process.env.STRIPE_SECRET_KEY)
 
 export const UpdateUser = async (req,res,next) => {
     if(req.user.id!=req.params.id) return next(errorHandler(403,'you can only edit your account or unauthorized'))
@@ -87,3 +90,61 @@ const removeFiles = async (filepath) => {
     }
 }
 
+export const Payment = async (req,res,next)=>{
+        const {price,customerId} = req.body
+        let planId = null
+        if (price===99) {
+            planId = process.env.STRIPE_PRO_API_KEY
+        }
+    try {
+        const session = await stripe.checkout.sessions.create({
+            mode:'subscription',
+            payment_method_types:['card'],
+            line_items:[
+                {
+                    price:planId,
+                    quantity:1,
+                    
+                }
+            ],
+            success_url:'http://localhost:5173/success',
+            cancel_url:'http://localhost:5173/cancel',
+            metadata:{
+                userId : customerId
+            }
+        })
+        if (!session) {
+           res.status(500).json('internal server error.') 
+        }
+        const updateUserSession = await userModel.findByIdAndUpdate(customerId,{
+                $set:{
+                    sessionId:session.id,
+                }
+        },{new:true})
+        if(!updateUserSession) return next(errorHandler('no update'))
+        res.status(200).json({session,updateUserSession})
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const PaymentSuccess = async(req,res,next)=>{
+    const {sessionId} = req.body
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId)
+        if (session.payment_status==='paid') {
+           const updateUser = await userModel.findByIdAndUpdate(req.user.id,{
+                $set:{
+                    subscribed:'yes'
+                }
+            },{new:true})
+            if(!updateUser) return next(errorHandler(500,'internal server error'))
+            res.status(200).json(updateUser)
+        }
+        
+    } catch (error) {
+        next(error)
+    }
+   
+}
