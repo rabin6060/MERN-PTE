@@ -122,7 +122,7 @@ export const Payment = async (req,res,next)=>{
                 }
         },{new:true})
         if(!updateUserSession) return next(errorHandler('no update'))
-        res.status(200).json(updateUserSession)
+        res.status(200).json({session,updateUserSession})
 
     } catch (error) {
         next(error)
