@@ -18,7 +18,7 @@ const questionSlice = createSlice({
             state.questions = action.payload,
             state.error = null
         },
-        questionFetchError : (state)=>{
+        questionFetchError : (state,action)=>{
             state.loading = false,
             state.questions = null,
             state.error = action.payload
