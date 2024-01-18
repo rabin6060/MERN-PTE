@@ -148,3 +148,23 @@ export const PaymentSuccess = async(req,res,next)=>{
     }
    
 }
+
+export const PaymentFailure = async(req,res,next)=>{
+    const {sessionId} = req.body
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId)
+        if (session.payment_status!=='paid') {
+           const updateUser = await userModel.findByIdAndUpdate(req.user.id,{
+                $set:{
+                    sessionId:null
+                }
+            },{new:true})
+            if(!updateUser) return next(errorHandler(500,'internal server error'))
+            res.status(200).json(updateUser)
+        }
+        
+    } catch (error) {
+        next(error)
+    }
+   
+}
