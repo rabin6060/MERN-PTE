@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='w-full bg-gray-900 overflow-hidden'>
+    <div className='w-full h-max bg-gray-900 overflow-hidden'>
         <div className='w-full sm:max-w-[60%] ml-5 sm:m-auto h-full py-10'>
             <div className='flex items-center gap-2 text-[#5f5e5e] pb-5 border-b-[1px] border-slate-600'>
                 <h2>Language: </h2>
