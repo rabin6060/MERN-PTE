@@ -14,6 +14,9 @@ import ProtectedQuestion from "./components/ProtectedQuestion";
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import { questionFetchError, questionFetchStart, questionFetchSuccess } from './redux/question/questionSlice'
+//import Payment from "./pages/Payment";
+import Success from "./pages/Success";
+import { Cancel } from "./pages/Cancel";
 import Payment from "./pages/Payment";
 
 
@@ -46,8 +49,10 @@ const App = () => {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/add" element={<AddQuestion />} />
           <Route element={<Protected />}>
+             <Route path="/success" element={<Success/>}/>
+             <Route path="/cancel" element={<Cancel/>}/>
             
-              <Route path="/payment" element={<Payment/>} />
+             <Route path="/payment" element={<Payment/>} />
 
             <Route path="/practise" element={<PractiseQuestions />} />
             <Route element={<ProtectedQuestion/>}>
